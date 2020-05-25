@@ -3,5 +3,44 @@
 {% extends 'base.html' %}
 {% block title %}主页{% endblock %}
 {% block content %}
-    <h1>欢迎回来！</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-1 col-md-offset-1">
+        <a class="btn btn-default" href="/blog/editBlog/" role="button">写博客</a>
+      </div>
+      <div class="col-md-8">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          {% for blog in blogs %}
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="heading{{ forloop.counter }}">
+              <h4 class="panel-title">
+                {% if forloop.counter == 1 %}
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ forloop.counter }}">
+                {% else %}
+                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}" aria-expanded="false" aria-controls="collapse{{ forloop.counter }}">
+                {% endif %}
+                  <div class="row">
+                    <div class="col-md-4">{{ blog.title }}</div>
+                    <div class="col-md-4">作者：{{ blog.author }}</div>
+                    <div class="col-md-4">{{ blog.pub_date }}</div>
+                  </div>
+                </a>
+              </h4>
+            </div>
+            {% if forloop.counter == 1 %}
+            <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading{{ forloop.counter }}">
+            {% else %}
+            <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{ forloop.counter }}">
+            {% endif %}
+              <div class="panel-body">
+                {{ blog.body }}<br>
+                <a class="btn btn-default" href="/blog/{{ blog.id }}" role="button">单独显示</a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

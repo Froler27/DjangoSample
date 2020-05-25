@@ -41,12 +41,12 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if request.session.is_login %}
-                  <li><a href="/blog/user/">当前在线：{{ request.session.user_name }}</a></li>
-                  <li><a href="/blog/logout/">登出</a></li>
-              {% else %}
-                  <li><a href="/blog/login/">登录</a></li>
-                  <li><a href="/blog/register/">注册</a></li>
-              {% endif %}
+              <li><a href="/blog/userIndex/">当前在线：{{ request.session.user_name }}</a></li>
+              <li><a href="/blog/logout/">登出</a></li>
+            {% else %}
+              <li><a href="/blog/login/">登录</a></li>
+              <li><a href="/blog/register/">注册</a></li>
+            {% endif %}
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
