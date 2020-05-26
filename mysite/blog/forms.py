@@ -14,4 +14,3 @@ class RegisterForm(forms.Form):
 class BlogForm(forms.Form):
     title = forms.CharField(label="标题", max_length=128, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
     content = forms.CharField(label="内容", required=True, widget=forms.Textarea(attrs={'class': 'form-control', 'rows':'20'}))
-

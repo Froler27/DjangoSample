@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.http import HttpResponse
-from .models import Blog, User, Comment, Reply
+from .models import Blog, User, Comment
 from .forms import UserForm, RegisterForm, BlogForm
 
 import hashlib
@@ -18,6 +18,22 @@ def index(request):
 
 def blogDetail(request, blog_id):
     blog = get_object_or_404(Blog, pk=blog_id)
+    
+    if request.method == "POST":
+        if not request.session.get('is_login',None):
+            return redirect('/blog/login/')
+        comment = request.POST.get('comment')
+        username = request.session.get('user_name')
+        new_comment = Comment.objects.create(blog=blog, body=comment, username=username)
+        
+        # new_comment.body = comment_form.body
+        # new_comment.username = username
+        new_comment.save()
+
+        return redirect('/blog/' + str(blog_id) + "/")
+
+    comments = Comment.objects.filter(blog=blog_id)
+    
     return render(request,'blog.html', locals())
 
 def login(request):
@@ -75,14 +91,6 @@ def register(request):
     register_form = RegisterForm()
     return render(request,'register.html', locals())
 
-def comment(request, blog_id):
-    pass
-    return render(request,'blog.html')
-
-def reply(request, blog_id):
-    pass
-    return render(request,'blog.html')
-
 def logout(request):
     if not request.session.get('is_login', None):
         return redirect("/blog/")
@@ -110,7 +118,6 @@ def editBlog(request):
             return redirect('/blog/userIndex/', locals())
     blog_form = BlogForm()
     return render(request,'editBlog.html', locals())
-
 
 def userIndex(request):
     if request.session.get('is_login',None):

@@ -18,6 +18,7 @@
       <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
     <![endif]-->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
     {% block css %}{% endblock %}
   </head>
   <body>
@@ -31,13 +32,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Mysite</a>
+          <a class="navbar-brand" href="/blog/">博客</a>
         </div>
   
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="my-nav">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/blog/">主页</a></li>
+            <li class="active"><a href="/blog/userIndex/">主页</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if request.session.is_login %}
