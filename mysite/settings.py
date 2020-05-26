@@ -25,7 +25,7 @@ SECRET_KEY = 'memy=l87a3b4m2ud*q&3lf_rd@_t5hb56&gtwm4ar(w9d)t2u_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['django-blog-5207.herokuapp.com']
 
 
 # Application definition
